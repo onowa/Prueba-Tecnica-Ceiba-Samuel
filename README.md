@@ -1,4 +1,4 @@
-# 🏦 CeibaFunds API - Sistema de Gestión de Fondos BTG Pactual
+# CeibaFunds API - Sistema de Gestión de Fondos BTG Pactual
 
 > **API REST completa para gestión de fondos de inversión desarrollada en .NET 8**
 
@@ -9,11 +9,11 @@
 
 ---
 
-## 📋 **ENTREGABLES BTG PACTUAL - PRUEBA TÉCNICA**
+# PRUEBA TÉCNICA**
 
-> **👥 Evaluadores BTG:** Enlaces directos a todas las respuestas de la prueba técnica
+> ** Enlaces directos a todas las respuestas de la prueba técnica
 
-### 🎯 **PARTE 1 (80%) - Sistema de Fondos**
+### *PARTE 1 (80%) - Sistema de Fondos**
 
 | Entregable                        | Status | 📁 Ubicación                                         |
 | --------------------------------- | ------ | ---------------------------------------------------- |
@@ -21,13 +21,13 @@
 | **1b) Modelo de datos NoSQL**     | ✅     | **[📖 Ver Respuesta](docs/modelo-datos-nosql.md)**   |
 | **1c) API REST funcional**        | ✅     | **[⚡ Ver Código + 40 Tests](#quick-start)**         |
 
-### 🗄️ **PARTE 2 (20%) - Consulta SQL**
+## **PARTE 2 (20%) - Consulta SQL**
 
 | Entregable               | Status | 📁 Ubicación                                          |
 | ------------------------ | ------ | ----------------------------------------------------- |
 | **Query SQL Optimizada** | ✅     | **[📄 Ver Query](sql-queries/Query%20Parte%202.sql)** |
 
-### 🚀 **EXTRAS - Deployment Production**
+# **EXTRAS - Deployment Production**
 
 | Entregable                   | Status | 📁 Ubicación                            |
 | ---------------------------- | ------ | --------------------------------------- |
@@ -37,11 +37,11 @@
 
 ---
 
-## 🎯 Resumen Ejecutivo
+# Resumen Ejecutivo
 
 **CeibaFunds API** es la solución completa para el sistema de fondos BTG Pactual que permite:
 
-### ✅ **Funcionalidades Implementadas**
+## **Funcionalidades Implementadas**
 
 - **Suscripción a fondos** con validaciones de saldo y montos mínimos
 - **Cancelación de suscripciones** con reembolso automático al balance
@@ -50,7 +50,7 @@
 - **Notificaciones automáticas** por email y SMS en cada operación
 - **API REST documentada** con Swagger/OpenAPI
 
-### 🏗️ **Arquitectura Empresarial**
+# **Arquitectura Empresarial**
 
 - **Clean Architecture** con separación clara de responsabilidades
 - **CQRS Pattern** para separar operaciones de lectura/escritura
@@ -58,7 +58,7 @@
 - **DynamoDB** para escalabilidad automática
 - **CloudFormation** para despliegue automatizado en AWS
 
-### ✅ **Entregables BTG Pactual**
+# **Entregables BTG Pactual**
 
 | Requerimiento                           | Status  | Ubicación                       |
 | --------------------------------------- | ------- | ------------------------------- |
@@ -87,9 +87,9 @@
 
 ---
 
-## 🚀 Inicio Rápido (Para Evaluadores BTG)
+# Inicio Rápido (Para Evaluadores BTG)
 
-### ⚡ Ejecución Inmediata
+## Ejecución Inmediata
 
 **¿Prisa? Solo necesitas esto:**
 
@@ -105,28 +105,28 @@ dotnet run --project src/CeibaFunds.API
 # 3. Probar: http://localhost:5144/swagger
 ```
 
-### 📋 Prerrequisitos
+# Prerrequisitos
 
-- ✅ **.NET 8 SDK** ([Descargar](https://dotnet.microsoft.com/download/dotnet/8.0))
-- ✅ **Docker Desktop** ([Descargar](https://www.docker.com/products/docker-desktop/))
-- 💡 **VS Code** (opcional, pero recomendado)
+-  **.NET 8 SDK** ([Descargar](https://dotnet.microsoft.com/download/dotnet/8.0))
+-  **Docker Desktop** ([Descargar](https://www.docker.com/products/docker-desktop/))
+-  **VS Code** (opcional, pero recomendado)
 
-### 🎯 Verificación Rápida
+## Verificación Rápida
 
 ```bash
-# ✅ Health check
+#  Health check
 curl http://localhost:5144/health
 # Respuesta: {"status":"healthy"}
 
-# ✅ Probar endpoints
+#  Probar endpoints
 curl http://localhost:5144/api/funds
 # Respuesta: Lista de fondos disponibles
 
-# ✅ Documentación interactiva
+#  Documentación interactiva
 # Navegador: http://localhost:5144/swagger
 ```
 
-### 🧪 Tests (Verificar Calidad)
+## Tests (Verificar Calidad)
 
 ```bash
 # Ejecutar todos los tests (40+ unitarios)
@@ -139,7 +139,7 @@ dotnet test tests/CeibaFunds.UnitTests
 dotnet test --collect:"XPlat Code Coverage"
 ```
 
-### 🆘 ¿Problemas?
+## ¿Problemas?
 
 **Puerto ocupado?** Cambiar puerto:
 
