@@ -9,6 +9,34 @@
 
 ---
 
+## 📋 **ENTREGABLES BTG PACTUAL - PRUEBA TÉCNICA**
+
+> **👥 Evaluadores BTG:** Enlaces directos a todas las respuestas de la prueba técnica
+
+### 🎯 **PARTE 1 (80%) - Sistema de Fondos**
+
+| Entregable                        | Status | 📁 Ubicación                                         |
+| --------------------------------- | ------ | ---------------------------------------------------- |
+| **1a) Justificación tecnológica** | ✅     | **[📖 Ver Respuesta](docs/tecnologias-solucion.md)** |
+| **1b) Modelo de datos NoSQL**     | ✅     | **[📖 Ver Respuesta](docs/modelo-datos-nosql.md)**   |
+| **1c) API REST funcional**        | ✅     | **[⚡ Ver Código + 40 Tests](#quick-start)**         |
+
+### 🗄️ **PARTE 2 (20%) - Consulta SQL**
+
+| Entregable               | Status | 📁 Ubicación                                          |
+| ------------------------ | ------ | ----------------------------------------------------- |
+| **Query SQL Optimizada** | ✅     | **[📄 Ver Query](sql-queries/Query%20Parte%202.sql)** |
+
+### 🚀 **EXTRAS - Deployment Production**
+
+| Entregable                   | Status | 📁 Ubicación                            |
+| ---------------------------- | ------ | --------------------------------------- |
+| **CloudFormation AWS**       | ✅     | **[☁️ Ver Templates](cloudformation/)** |
+| **Terraform Infrastructure** | ✅     | **[🏗️ Ver Código](terraform/)**         |
+| **Docker Deployment**        | ✅     | **[🐳 Ver Setup](docker-compose.yml)**  |
+
+---
+
 ## 🎯 Resumen Ejecutivo
 
 **CeibaFunds API** es la solución completa para el sistema de fondos BTG Pactual que permite:
@@ -491,6 +519,64 @@ dotnet run --project src/CeibaFunds.API --launch-profile Production
 | `scripts/create-tables.ps1` | Crear tablas DynamoDB local         | `scripts\create-tables.ps1`               |
 | `scripts/docker-manage.ps1` | Gestionar contenedores Docker       | `scripts\docker-manage.ps1 start`         |
 | `scripts/health-check.ps1`  | Verificar estado de la API          | `scripts\health-check.ps1`                |
+
+---
+
+## ✅ **CHECKLIST DE EVALUACIÓN BTG PACTUAL**
+
+### **Parte 1 - Sistema de Fondos (80%)**
+
+#### **1a) Justificación Tecnológica** ✅ [`docs/tecnologias-solucion.md`](docs/tecnologias-solucion.md)
+
+- [x] **.NET 8** - Framework principal justificado
+- [x] **DynamoDB** - Base de datos NoSQL justificada
+- [x] **Clean Architecture** - Patrón arquitectónico justificado
+- [x] **CQRS + MediatR** - Patrones de diseño justificados
+- [x] **Docker + AWS** - DevOps y deployment justificados
+
+#### **1b) Modelo de Datos NoSQL** ✅ [`docs/modelo-datos-nosql.md`](docs/modelo-datos-nosql.md)
+
+- [x] **Esquema DynamoDB** diseñado y documentado
+- [x] **Partition Keys** y Sort Keys definidos
+- [x] **Índices GSI** para consultas eficientes
+- [x] **Patrones de acceso** identificados y optimizados
+- [x] **Modelado de relaciones** en NoSQL
+
+#### **1c) API REST Funcional** ✅ [Ver código completo](src/)
+
+- [x] **Suscripción a fondos** - Endpoint implementado y probado
+- [x] **Cancelación de suscripciones** - Endpoint implementado y probado
+- [x] **Gestión de clientes** - CRUD completo
+- [x] **Historial de transacciones** - Consultas y reportes
+- [x] **40+ Tests unitarios** - Cobertura completa [`tests/`](tests/)
+- [x] **Documentación OpenAPI** - Swagger UI disponible
+- [x] **Manejo de errores** - Respuestas HTTP estándar
+- [x] **Validaciones** - FluentValidation implementado
+
+### **Parte 2 - Consulta SQL (20%)**
+
+#### **Query Optimizada** ✅ [`sql-queries/Query Parte 2.sql`](sql-queries/Query%20Parte%202.sql)
+
+- [x] **Consulta correcta** - Obtiene clientes con productos de 3 tipos
+- [x] **Optimización** - Uso de EXISTS para performance
+- [x] **Sintaxis correcta** - SQL estándar válido
+- [x] **Documentación** - Query explicada y comentada
+
+### **Extras - Valor Agregado**
+
+#### **Deployment Production** ✅
+
+- [x] **CloudFormation** - Templates AWS [`cloudformation/`](cloudformation/)
+- [x] **Terraform** - Infrastructure as Code [`terraform/`](terraform/)
+- [x] **Docker** - Containerización completa
+- [x] **CI/CD** - GitHub Actions workflows [`.github/workflows/`](.github/workflows/)
+
+#### **Calidad de Código** ✅
+
+- [x] **Clean Code** - Principios SOLID aplicados
+- [x] **Testing** - 40+ pruebas unitarias
+- [x] **Documentation** - README profesional
+- [x] **Git** - Historial de commits limpio
 
 ---
 
