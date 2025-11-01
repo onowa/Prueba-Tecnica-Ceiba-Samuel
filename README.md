@@ -522,7 +522,6 @@ dotnet run --project src/CeibaFunds.API --launch-profile Production
 
 ---
 
-## ✅ **CHECKLIST DE EVALUACIÓN BTG PACTUAL**
 
 ### **Parte 1 - Sistema de Fondos (80%)**
 
