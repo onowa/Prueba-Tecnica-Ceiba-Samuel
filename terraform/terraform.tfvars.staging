@@ -1,0 +1,19 @@
+# Staging Environment Configuration
+environment = "staging"
+aws_region  = "us-east-1"
+
+# Monitoring and backup settings
+enable_monitoring = true
+enable_backup     = true
+log_retention_days = 14
+
+# API throttling (moderate limits)
+api_throttle_rate_limit  = 100
+api_throttle_burst_limit = 200
+
+# Backup settings
+backup_retention_days = 15
+
+# Optional: Custom domain for staging
+# api_domain = "api-staging.ceibafunds.com"
+# certificate_arn = "arn:aws:acm:us-east-1:ACCOUNT:certificate/CERT-ID"

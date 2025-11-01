@@ -1,0 +1,83 @@
+###
+# CeibaFunds API Test Requests
+###
+
+@baseUrl = http://localhost:5144
+@contentType = application/json
+
+###
+# Health Check
+GET {{baseUrl}}/health
+Accept: {{contentType}}
+
+###
+# Get All Customers
+GET {{baseUrl}}/api/customers
+Accept: {{contentType}}
+
+###
+# Get Customer by ID
+GET {{baseUrl}}/api/customers/1
+Accept: {{contentType}}
+
+###
+# Create New Customer
+POST {{baseUrl}}/api/customers
+Content-Type: {{contentType}}
+
+{
+  "firstName": "Juan",
+  "lastName": "Pérez",
+  "email": "juan.perez@example.com",
+  "phoneNumber": "123-456-7890",
+  "dateOfBirth": "1990-05-15",
+  "initialBalance": 500000
+}
+
+###
+# Get All Funds
+GET {{baseUrl}}/api/funds
+Accept: {{contentType}}
+
+###
+# Get Fund by ID
+GET {{baseUrl}}/api/funds/1
+Accept: {{contentType}}
+
+###
+# Create New Fund
+POST {{baseUrl}}/api/funds
+Content-Type: {{contentType}}
+
+{
+  "name": "Fondo Conservador Plus",
+  "category": "ConservativeFixedIncome",
+  "minimumAmount": 75000,
+  "description": "Fondo de inversión conservador para perfiles de riesgo bajo"
+}
+
+###
+# Get Customer Subscriptions
+GET {{baseUrl}}/api/subscriptions/customer/1
+Accept: {{contentType}}
+
+###
+# Subscribe to Fund
+POST {{baseUrl}}/api/subscriptions
+Content-Type: {{contentType}}
+
+{
+  "customerId": "1",
+  "fundId": "1",
+  "amount": 100000
+}
+
+###
+# Cancel Subscription
+PUT {{baseUrl}}/api/subscriptions/1/cancel
+Content-Type: {{contentType}}
+
+###
+# Get Fund Information
+GET {{baseUrl}}/api/funds/2
+Accept: {{contentType}}

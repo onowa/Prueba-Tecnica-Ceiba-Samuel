@@ -1,0 +1,29 @@
+# Configuración de Prometheus para CeibaFunds API
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # Configuración para la API de CeibaFunds
+  - job_name: "ceibafunds-api"
+    static_configs:
+      - targets: ["ceibafunds-api:8080"]
+    metrics_path: "/metrics"
+    scrape_interval: 10s
+    scrape_timeout: 5s
+    scheme: "http"
+
+  # Configuración para Prometheus mismo
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Configuración para DynamoDB Local (si tiene métricas)
+  - job_name: "dynamodb-local"
+    static_configs:
+      - targets: ["dynamodb-local:8000"]
+    scrape_interval: 30s

@@ -1,0 +1,65 @@
+# Archivos y directorios a ignorar durante la construcción de Docker
+
+# Directorios de compilación
+**/bin/
+**/obj/
+**/out/
+
+# Archivos de Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+
+# Archivos de NuGet
+packages/
+*.nupkg
+
+# Archivos temporales
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Logs
+logs/
+*.log
+
+# Archivos de base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Node modules (si hay frontend)
+node_modules/
+
+# Archivos de Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Archivos de Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentación
+README.md
+*.md
+
+# Archivos de CI/CD
+.github/
+.gitlab-ci.yml
+azure-pipelines.yml
+
+# Archivos de configuración local
+appsettings.Local.json
+appsettings.Development.json
+.env
+.env.local
+
+# Archivos de herramientas
+.editorconfig
+.tool-versions
+global.json

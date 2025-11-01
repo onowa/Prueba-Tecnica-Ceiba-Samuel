@@ -1,0 +1,15 @@
+# Development Environment Configuration
+environment = "dev"
+aws_region  = "us-east-1"
+
+# Monitoring and backup settings
+enable_monitoring = true
+enable_backup     = false  # Disable backup for dev to save costs
+log_retention_days = 7     # Shorter retention for dev
+
+# API throttling (more lenient for dev)
+api_throttle_rate_limit  = 50
+api_throttle_burst_limit = 100
+
+# Backup settings
+backup_retention_days = 7

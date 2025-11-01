@@ -1,0 +1,60 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch API",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/CeibaFunds.API/bin/Debug/net8.0/CeibaFunds.API.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/CeibaFunds.API",
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "%s/swagger"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AWS_ACCESS_KEY_ID": "dummy",
+        "AWS_SECRET_ACCESS_KEY": "dummy",
+        "AWS_REGION": "us-east-1",
+        "DynamoDB_Endpoint": "http://localhost:8000"
+      },
+      "preLaunchTask": "build-api"
+    },
+    {
+      "name": "Launch API (Docker)",
+      "type": "docker",
+      "request": "launch",
+      "preLaunchTask": "docker-run: debug",
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/CeibaFunds.API/CeibaFunds.API.csproj"
+      }
+    },
+    {
+      "name": "Attach to API Container",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickRemoteProcess}",
+      "pipeTransport": {
+        "pipeCwd": "${workspaceFolder}",
+        "pipeProgram": "docker",
+        "pipeArgs": ["exec", "-i", "ceibafunds-api"],
+        "debuggerPath": "/vsdbg/vsdbg",
+        "quoteArgs": false
+      },
+      "sourceFileMap": {
+        "/app": "${workspaceFolder}"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch with DynamoDB",
+      "configurations": ["Launch API"],
+      "preLaunchTask": "start-dynamodb"
+    }
+  ]
+}

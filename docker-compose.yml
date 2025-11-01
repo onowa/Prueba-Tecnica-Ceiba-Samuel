@@ -1,0 +1,148 @@
+# Docker Compose para desarrollo local de CeibaFunds API
+services:
+  # ============================================
+  # API Principal
+  # ============================================
+  ceibafunds-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: ceibafunds-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - AWS__ServiceURL=http://dynamodb-local:8000
+      - AWS__Profile=default
+      - AWS__Region=us-east-1
+      - AWS__AccessKey=dummy
+      - AWS__SecretKey=dummy
+      - Serilog__MinimumLevel=Information
+    depends_on:
+      - dynamodb-local
+    networks:
+      - ceibafunds-network
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ============================================
+  # DynamoDB Local para desarrollo
+  # ============================================
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    container_name: ceibafunds-dynamodb
+    ports:
+      - "8000:8000"
+    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-dbPath", "/home/dynamodblocal/data"]
+    volumes:
+      - dynamodb_data:/home/dynamodblocal/data
+    networks:
+      - ceibafunds-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # DynamoDB Admin (Interfaz web para DynamoDB)
+  # ============================================
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:latest
+    container_name: ceibafunds-dynamodb-admin
+    ports:
+      - "8001:8001"
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb-local:8000
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+    depends_on:
+      - dynamodb-local
+    networks:
+      - ceibafunds-network
+    restart: unless-stopped
+
+  # ============================================
+  # Inicializador de tablas DynamoDB
+  # ============================================
+  dynamodb-initializer:
+    image: amazon/aws-cli:latest
+    container_name: ceibafunds-db-init
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+    depends_on:
+      - dynamodb-local
+    networks:
+      - ceibafunds-network
+    volumes:
+      - ./docker/init-dynamodb.sh:/init-dynamodb.sh
+    command: >
+      sh -c "
+        sleep 10 &&
+        chmod +x /init-dynamodb.sh &&
+        /init-dynamodb.sh
+      "
+
+  # ============================================
+  # Prometheus para métricas (opcional)
+  # ============================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ceibafunds-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - ceibafunds-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # ============================================
+  # Grafana para visualización (opcional)
+  # ============================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ceibafunds-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - ceibafunds-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+# ============================================
+# Networks
+# ============================================
+networks:
+  ceibafunds-network:
+    driver: bridge
+    name: ceibafunds-network
+
+# ============================================
+# Volumes
+# ============================================
+volumes:
+  dynamodb_data:
+    name: ceibafunds-dynamodb-data
+  grafana_data:
+    name: ceibafunds-grafana-data

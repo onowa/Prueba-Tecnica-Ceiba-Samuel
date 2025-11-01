@@ -1,0 +1,97 @@
+{
+  "dotnet.defaultSolution": "./CeibaFunds.sln",
+  "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+  "dotnet.server.useOmnisharp": true,
+  "omnisharp.useModernNet": true,
+  "omnisharp.enableRoslynAnalyzers": true,
+  "dotnet.unitTests.runSettingsPath": "./tests/test.runsettings",
+
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/.vs": true,
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/logs": true,
+    "**/data": true
+  },
+
+  "files.watcherExclude": {
+    "**/bin/**": true,
+    "**/obj/**": true,
+    "**/logs/**": true,
+    "**/data/**": true
+  },
+
+  "search.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/logs": true,
+    "**/data": true,
+    "**/node_modules": true,
+    "**/.git": true
+  },
+
+  "csharp.semanticHighlighting.enabled": true,
+  "csharp.format.enable": true,
+
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+
+  "json.schemas": [
+    {
+      "fileMatch": ["appsettings*.json"],
+      "url": "https://json.schemastore.org/appsettings.json"
+    }
+  ],
+
+  "docker.defaultRegistryPath": "ceibafunds",
+
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "args": ["-NoProfile"]
+    }
+  },
+
+  "rest-client.environmentVariables": {
+    "local": {
+      "baseUrl": "http://localhost:5000",
+      "apiKey": "development-key"
+    },
+    "docker": {
+      "baseUrl": "http://localhost:5000",
+      "apiKey": "development-key"
+    }
+  },
+
+  "testExplorer.useNativeTesting": true,
+
+  "files.associations": {
+    "*.http": "http",
+    "docker-compose*.yml": "dockercompose",
+    "Dockerfile*": "dockerfile"
+  },
+
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": [
+      "docker-compose*.yml",
+      "docker-compose*.yaml"
+    ]
+  },
+
+  "git.ignoreLimitWarning": true,
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.cs": "$(capture).*.cs",
+    "*.csproj": "$(capture).csproj.user",
+    "appsettings.json": "appsettings.*.json",
+    "docker-compose.yml": "docker-compose.*.yml, .dockerignore, Dockerfile*"
+  }
+}

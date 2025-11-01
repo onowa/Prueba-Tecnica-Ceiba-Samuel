@@ -1,0 +1,21 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "ms-dotnettools.csdevkit",
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-azuretools.vscode-docker",
+    "humao.rest-client",
+    "formulahendry.dotnet-test-explorer",
+    "kreativ-software.csharpextensions",
+    "jmrog.vscode-nuget-package-manager",
+    "fernandoescolar.vscode-solution-explorer",
+    "ms-vscode.test-adapter-converter",
+    "ms-vscode.powershell",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+    "ms-playwright.playwright",
+    "ms-vscode-remote.remote-containers"
+  ]
+}

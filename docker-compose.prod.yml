@@ -1,0 +1,55 @@
+# Docker Compose para producción
+# Usar: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+services:
+  # API en configuración de producción
+  ceibafunds-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - Serilog__MinimumLevel=Warning
+      - Serilog__WriteTo__0__Name=Console
+      - Serilog__WriteTo__1__Name=File
+      - Serilog__WriteTo__1__Args__path=./logs/ceibafunds-{Date}.log
+      - Serilog__WriteTo__1__Args__rollingInterval=Day
+      # Variables AWS reales (serán sobrescritas por variables de entorno del sistema)
+      - AWS__ServiceURL=${AWS_DYNAMODB_ENDPOINT:-https://dynamodb.us-east-1.amazonaws.com}
+      - AWS__Region=${AWS_REGION:-us-east-1}
+    # No montar volúmenes de código en producción
+    volumes:
+      - ./logs:/app/logs
+    # Configuración de recursos
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    # Healthcheck más estricto
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Remover DynamoDB local en producción (usar AWS DynamoDB real)
+  dynamodb-local:
+    profiles:
+      - disabled
+
+  # Remover DynamoDB Admin en producción
+  dynamodb-admin:
+    profiles:
+      - disabled
+
+  # Remover inicializador en producción
+  dynamodb-initializer:
+    profiles:
+      - disabled

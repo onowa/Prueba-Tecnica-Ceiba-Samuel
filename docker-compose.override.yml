@@ -1,0 +1,38 @@
+# Docker Compose Override para desarrollo local
+# Este archivo se aplica automáticamente en desarrollo
+services:
+  # Configuraciones específicas para desarrollo
+  ceibafunds-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Serilog__MinimumLevel=Debug
+      - Serilog__WriteTo__0__Name=Console
+      - Serilog__WriteTo__1__Name=File
+      - Serilog__WriteTo__1__Args__path=./logs/ceibafunds-{Date}.log
+      - Serilog__WriteTo__1__Args__rollingInterval=Day
+    volumes:
+      # Montar código fuente para hot reload (opcional)
+      - .:/app/src:ro
+      # Montar logs localmente
+      - ./logs:/app/logs
+    # Habilitar debugging
+    ports:
+      - "5000:8080"
+      - "5001:8081"  # Puerto adicional para HTTPS si es necesario
+    
+  # DynamoDB con configuración de desarrollo
+  dynamodb-local:
+    # Habilitar logging para debugging
+    environment:
+      - JAVA_OPTS=-Djava.library.path=./DynamoDBLocal_lib -Dcom.amazonaws.sdk.disableEc2Metadata=true
+    # Persistir datos localmente para desarrollo
+    volumes:
+      - ./data/dynamodb:/home/dynamodblocal/data
+    
+  # DynamoDB Admin siempre disponible en desarrollo
+  dynamodb-admin:
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb-local:8000
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
